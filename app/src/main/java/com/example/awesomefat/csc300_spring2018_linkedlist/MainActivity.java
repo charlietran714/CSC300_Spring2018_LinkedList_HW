@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         String temp = this.newNumberET.getText().toString();
         this.newNumberET.setText("");
         this.ll.addFront(Integer.parseInt(temp));
-        //this.ll.display();
+        this.ll.display();
     }
 
     public void addEndButtonClicked(View v)
@@ -59,6 +59,18 @@ public class MainActivity extends AppCompatActivity
         String temp = this.newNumberET.getText().toString();
         this.newNumberET.setText("");
         this.ll.addEnd(Integer.parseInt(temp));
-        //this.ll.display();
+        this.ll.display();
+    }
+    public void removeFrontButtonClicked(View v)
+    {
+        ll.removeFront();
+        ll.display();
+
+    }
+    public void removeEndButtonClicked(View v)
+    {
+        ll.removeEnd();
+        ll.display();
+
     }
 }

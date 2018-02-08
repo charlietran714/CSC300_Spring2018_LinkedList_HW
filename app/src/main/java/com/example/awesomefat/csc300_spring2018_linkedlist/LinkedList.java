@@ -14,25 +14,48 @@ public class LinkedList
     private Node head;
     private ViewGroup linkedListContainer;
     private Context theContext;
+    private int numElements;
 
     public LinkedList(ViewGroup linkedListContainer, Context theContext)
     {
         this.head = null;
         this.linkedListContainer = linkedListContainer;
         this.theContext = theContext;
+        this.numElements = 0;
     }
+
 
     public int removeFront()
     {
         //removes the front of the linked list, and updates the interface
         //and ultimately returns the int payload of the node that was removed.
         this.linkedListContainer.removeViewAt(0); // removes the view at 0
+        Node currNode = this.head;
+        this.head = head.getNextNode();
+        currNode.setNextNode(null);
+        this.numElements--;
+        return currNode.getPayload();
+
     }
 
     public int removeEnd()
     {
         //removes the end of the linked list, and updates the interface
         //and ultimately returns the int payload of the node that was removed.
+        this.linkedListContainer.removeViewAt(numElements - 1 );
+        Node currNode = this.head;
+
+        while(currNode.getNextNode() != null)
+        {
+            currNode = currNode.getNextNode();
+        }
+        //currnode is sitting at the last node
+        currNode.setNextNode(null);
+
+        return 0;
+
+
+
     }
 
     public void addFront(int payload)
@@ -43,12 +66,14 @@ public class LinkedList
         if(this.head == null)
         {
             this.head = n;
+            this.numElements++;
         }
         else
         {
             //not dealing with the empty list
             n.setNextNode(this.head);
             this.head = n;
+            this.numElements++;
         }
 
         //update the interface
@@ -63,10 +88,12 @@ public class LinkedList
         if(this.head == null)
         {
             this.addFront(payload);
+            this.numElements++;
         }
         else
         {
             this.head.addEnd(payload);
+            this.numElements++;
             /*
             Node n = new Node(payload);
             Node currNode = this.head;
